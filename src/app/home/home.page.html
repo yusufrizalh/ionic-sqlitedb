@@ -1,20 +1,199 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Blank
+      Ionic 5 SQLite
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content padding text-center>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <!-- <ion-button expand="block" (click)="createDB()">
+    Create DataBase
+  </ion-button>
+
+  <ion-button expand="block" (click)="createTable()">
+    Create Table
+  </ion-button>
+
+  <ion-button expand="block" (click)="getRows()">
+    Get Rows
+  </ion-button> -->
+
+
+  <!-- <ion-card>
+    <ion-label>Name</ion-label>
+    <ion-input placeholder="Enter Name" [(ngModel)]="first_name" value={{first_name}} (ionBlur)="insertRow()"></ion-input>
+    <ion-label>Address</ion-label>
+    <ion-input placeholder="Enter Address" [(ngModel)]="address" value={{address}} (ionBlur)="insertRow()"></ion-input>
+    <ion-label>PAN No.</ion-label>
+    <ion-input placeholder="Enter PAN" [(ngModel)]="pan" value={{pan}} (ionBlur)="insertRow()" ></ion-input>
+    <ion-label>EMAIL</ion-label>
+    <ion-input placeholder="Enter Email" [(ngModel)]="email" ></ion-input>
+    <ion-label>PHONE</ion-label>
+    <ion-input placeholder="Enter Phone" [(ngModel)]="phone" ></ion-input>
+  </ion-card> -->
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Offline Form</ion-card-subtitle>
+      <ion-card-title>Enter Details</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list lines="full">
+        <ion-item>
+          <ion-label position="Stacked">Name:</ion-label>
+          <ion-input placeholder="Enter Name" [(ngModel)]="first_name" value={{first_name}}>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-item>
+          <ion-label position="Stacked">Address:</ion-label>
+          <ion-input placeholder="Enter Address" [(ngModel)]="address" value={{address}}>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-list lines="full">
+        <ion-item>
+          <ion-label position="Stacked">PAN No.:</ion-label>
+          <ion-input placeholder="Enter PAN" [(ngModel)]="pan" value={{pan}}></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <!-- 
+      <form #addressForm="ngForm" class="container mt-3" (ngSubmit)="logValue()">
+        <div class="row justify-content-center">
+          <div class="col-6">
+              <ion-button type="button" class="btn btn-primary mb-2" (click)="addAddress()">Add Address</ion-button>
+            <section *ngFor="let address of addresses; let i = index;">
+              <div class="row">
+                <div class="col-6">
+                    <h4>Address {{i + 1}}</h4>
+                </div>
+                <div class="col-6 text-right">
+                    <ion-button type="button" class="btn btn-danger btn-sm" (click)="removeAddress(i)">Remove</ion-button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <ion-label>Address</ion-label>
+                        <ion-input type="text" class="form-control" [(ngModel)]="address.address" name="address_{{address.id}}" placeholder="St. Thomas Apartment"/>
+                      </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Street</label>
+                        <input type="text" class="form-control" [(ngModel)]="address.street" name="street_{{address.id}}" placeholder="South Street"/>
+                      </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" class="form-control" [(ngModel)]="address.city" name="city_{{address.id}}" placeholder="Mumbai"/>
+                      </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Country</label>
+                        <select class="form-control" [(ngModel)]="address.country" name="country_{{address.id}}" placeholder="India">
+                          <option value="india">India</option>
+                          <option value="usa">USA</option>
+                          <option value="england">England</option>
+                        </select>
+                      </div>
+                </div>
+              </div>
+            </section>
+      
+            <div class="text-right">
+                <input type="submit" class="btn btn-success" value="Submit"/>
+            </div>
+            
+          </div>
+        </div>
+      
+      </form> -->
+
+
+
+
+    </ion-card-content>
+  </ion-card>
+  <ng-container *ngIf="updateActive; else elseTemplateUpdate">
+    <ion-button expand="block" (click)="updateRow()">
+      Update Row
+    </ion-button>
+  </ng-container>
+  <ng-template #elseTemplateUpdate>
+    <ion-button expand="full" (click)="insertRow()">
+      Save
+    </ion-button>
+
+    <ion-button expand="full" color="success" (click)="submit()">
+      Submit
+    </ion-button>
+  </ng-template>
+
+
+
+
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Row ID
+      </ion-col>
+      <ion-col>
+        Details
+      </ion-col>
+      <ion-col>
+        Delete
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of row_data">
+      <ion-col>
+        {{item.pid}}
+
+
+      </ion-col>
+      <ion-col>
+        {{item.Name}}
+        {{item.Address}}
+        {{item.Pan}}
+      </ion-col>
+      <!-- <ion-col>
+        {{item.Name}}
+      </ion-col>
+      <ion-col>
+        {{item.Address}}
+      </ion-col> -->
+      <!-- <ion-col>
+        {{item.Pan}}
+      </ion-col>
+      <ion-col>
+        {{item.Email}}
+      </ion-col>
+      <ion-col>
+        {{item.Phone}}
+      </ion-col> -->
+      <ion-col>
+        <ion-button (click)="deleteRow(item)" size="small" color="danger">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+        <!-- <ion-button (click)="enableUpdate(item)" size="small" color="warning">
+          <ion-icon name="create"></ion-icon>
+        </ion-button> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
